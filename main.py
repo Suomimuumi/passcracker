@@ -2,13 +2,25 @@ import hashlib
 import os
 import time
 import random
+import sys
 
-print(hashlib.md5("Bertta".encode()).hexdigest())
-input()
+
+
+def get_arg(arg_name):
+  index = 0
+  for i in sys.argv:
+    if(arg_name in i):
+      return sys.argv[index+1]
+    index+=1
 
 
 characters = open("characters.txt","r").read().splitlines()
-hash="71319e2cba8ef95cac7647527a3291f2"
+if(get_arg("-hash")):
+  hash = get_arg("-hash")
+else:
+  hash = input("[HASH] Give a hash >>> ")
+print("[READY] Ready to crack hash '" + hash+"'")
+input()
 import itertools
 chars = open("characters.txt","r").read().replace("\n","")
 chars = ''.join(random.sample(chars,len(chars)))
